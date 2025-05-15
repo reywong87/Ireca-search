@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "IrecaSearch": {
+    "ireca-search": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "IrecaSearch:build:production"
+              "buildTarget": "ireca-search:build:production"
             },
             "development": {
-              "buildTarget": "IrecaSearch:build:development"
+              "buildTarget": "ireca-search:build:development"
             }
           },
           "defaultConfiguration": "development"
