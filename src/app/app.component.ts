@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {initFlowbite} from 'flowbite';
+import {TreatmentsComponent} from "../treatments-folder/treatments/treatments.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+    imports: [RouterOutlet, TreatmentsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
