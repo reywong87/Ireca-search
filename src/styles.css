@@ -16,3 +16,7 @@
     --color-primary-800: #1e40af;
     --color-primary-900: #1e3a8a;
 }
+
+body{
+    @apply bg-gray-50 dark:bg-gray-900
+}

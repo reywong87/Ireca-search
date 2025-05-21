@@ -12,7 +12,8 @@ export interface IUser {
 export class AuthService {
     private _auth = inject(Auth);
     
-    public signIn(user: IUser){
-        return signInWithEmailAndPassword(this._auth, user.email, user.password);
+    
+    async signIn(user: IUser){
+        return await signInWithEmailAndPassword(this._auth, user.email, user.password);
     }
 }

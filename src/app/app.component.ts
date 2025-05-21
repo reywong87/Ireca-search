@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, inject, OnInit} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 import {initFlowbite} from 'flowbite';
 import {TreatmentsComponent} from "../treatments-folder/treatments/treatments.component";
+import {AuthStateService} from "../services/auth-state.service";
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,15 @@ import {TreatmentsComponent} from "../treatments-folder/treatments/treatments.co
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'IrecaSearch';
+  authState = inject(AuthStateService);
+  private _router = inject(Router);
 
   ngOnInit() {
     initFlowbite();
+  }
+  
+  async logOut() {
+    await this.authState.logout();
+    this._router.navigateByUrl('');
   }
 }
