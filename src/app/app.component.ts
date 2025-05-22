@@ -1,20 +1,19 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {initFlowbite} from 'flowbite';
-import {TreatmentsComponent} from "../treatments-folder/treatments/treatments.component";
 import {AuthStateService} from "../services/auth-state.service";
 
 @Component({
   selector: 'app-root',
-    imports: [RouterOutlet, TreatmentsComponent],
+    imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   authState = inject(AuthStateService);
   private _router = inject(Router);
 
-  ngOnInit() {
+  ngAfterViewInit() {
     initFlowbite();
   }
   
