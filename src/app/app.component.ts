@@ -2,10 +2,11 @@ import {AfterViewInit, Component, inject} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {initFlowbite} from 'flowbite';
 import {AuthStateService} from "../services/auth-state.service";
+import {ToastMessageComponent} from "../components/toast-message/toast-message.component";
 
 @Component({
   selector: 'app-root',
-    imports: [RouterOutlet],
+    imports: [RouterOutlet, ToastMessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

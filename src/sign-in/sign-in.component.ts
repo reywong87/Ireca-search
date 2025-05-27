@@ -2,11 +2,12 @@ import {Component, inject, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {ToastService} from "../services/toast.service";
 
 @Component({
     selector: 'app-sign-in',
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     templateUrl: './sign-in.component.html',
     styleUrl: './sign-in.component.css'
@@ -15,6 +16,8 @@ export class SignInComponent {
     private _formBuilder = inject(FormBuilder);
     private _authService = inject(AuthService);
     private _router = inject(Router);
+    private _toastService = inject(ToastService);
+    
     public showError = signal(false);
     public form: FormGroup = this._formBuilder.group({
         email: [
@@ -34,7 +37,7 @@ export class SignInComponent {
         }
         catch(err){
             console.log(err);
-            this.showErrorMsg();
+            this._toastService.showToast('Usuario o contraseña incorrecto', 'error');
         }
     }
     
