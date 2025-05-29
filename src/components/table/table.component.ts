@@ -5,7 +5,7 @@ import {TreatmentModalComponent} from "../treatment-modal/treatment-modal.compon
 @Component({
     selector: 'app-table',
     imports: [
-        TreatmentModalComponent
+        TreatmentModalComponent,
     ],
     templateUrl: './table.component.html',
     styleUrl: './table.component.css'
@@ -16,7 +16,9 @@ export class TableComponent {
     treatments = input.required<ITreatment[]>();
     selectedTreatment = signal<ITreatment | null>(null);
     treatmentToDelete = signal<ITreatment | null>(null);
-
+    
+    
+    
     openEditModal(treatment: ITreatment) {
         this.selectedTreatment.set(treatment);
     }
