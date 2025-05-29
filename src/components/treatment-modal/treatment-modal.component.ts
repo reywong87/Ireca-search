@@ -27,12 +27,7 @@ export class TreatmentModalComponent {
 
   constructor() {
     effect(() => {
-      if (this.treatmentToEdit()) {
-        this.modalForm.patchValue({
-          suffering: this.treatmentToEdit()?.suffering,
-          treatment: this.treatmentToEdit()?.treatment
-        });
-      }
+      this.resetModal();
     });
   }
   
@@ -63,7 +58,22 @@ export class TreatmentModalComponent {
     }
   }
   
+  resetModal(){
+    if (this.treatmentToEdit()) {
+      this.modalForm.patchValue({
+        suffering: this.treatmentToEdit()?.suffering,
+        treatment: this.treatmentToEdit()?.treatment
+      });
+    }
+    else {
+      this.modalForm.reset({
+        suffering: '',
+        treatment: ''
+      });
+    }
+  }
+  
   onCloseModal(){
-    //this.modalForm.reset();
+    this.resetModal();
   }
 }
