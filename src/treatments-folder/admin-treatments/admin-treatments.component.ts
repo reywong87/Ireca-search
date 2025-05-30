@@ -4,6 +4,7 @@ import {TreatmentModalComponent} from "../../components/treatment-modal/treatmen
 import {TableComponent} from "../../components/table/table.component";
 import {TreatmentService} from "../../services/treatment.service";
 import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
+import {createFilteredTreatments} from "../../util/filter-treatments.util";
 
 @Component({
   selector: 'app-admin-treatments',
@@ -19,19 +20,7 @@ export class AdminTreatmentsComponent implements AfterViewInit{
     private _treatmentService = inject(TreatmentService);
     treatments = this._treatmentService.getTreatments;
     searchQuery = signal<string>('');
-
-    filteredTreatments = computed(() => {
-        const normalize = (str: string) =>
-            str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-        
-        const query = normalize(this.searchQuery());
-        return this.treatments().filter(t =>
-        {
-            const suffering = normalize(t.suffering);
-            const treatment = normalize(t.treatment);
-            return suffering.includes(query) || treatment.includes(query);
-        });
-    });
+    filteredTreatments = createFilteredTreatments(this.treatments, this.searchQuery);
     
     ngAfterViewInit() {
         setTimeout(() => {
