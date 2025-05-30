@@ -7,7 +7,7 @@ import {Component, output, signal} from '@angular/core';
   styleUrl: './filter-treatment.component.css'
 })
 export class FilterTreatmentComponent {
-  centers = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'ds'];
+  centers = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
   selectedCenters = signal<string[]>([]);
   centersChanged = output<string[]>();
   
