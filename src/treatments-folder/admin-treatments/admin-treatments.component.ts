@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, computed, inject, signal} from '@angular/core';
+import {AfterViewInit, Component, computed, effect, inject, signal} from '@angular/core';
 import {initFlowbite} from "flowbite";
 import {TreatmentModalComponent} from "../../components/treatment-modal/treatment-modal.component";
 import {TableComponent} from "../../components/table/table.component";
@@ -18,9 +18,16 @@ import {createFilteredTreatments} from "../../util/filter-treatments.util";
 })
 export class AdminTreatmentsComponent implements AfterViewInit{
     private _treatmentService = inject(TreatmentService);
+    private _flowbiteInitEffect = effect(() => {
+        const treatments = this.filteredTreatments();
+        if (!treatments || treatments.length === 0) return;
+        setTimeout(() => initFlowbite(), 0);
+    });
+    
     treatments = this._treatmentService.getTreatments;
     searchQuery = signal<string>('');
     filteredTreatments = createFilteredTreatments(this.treatments, this.searchQuery);
+    
     
     ngAfterViewInit() {
         setTimeout(() => {

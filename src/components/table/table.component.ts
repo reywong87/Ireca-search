@@ -1,6 +1,7 @@
-import {Component, inject, input, signal} from '@angular/core';
+import {AfterViewInit, Component, effect, inject, input, signal} from '@angular/core';
 import {ITreatment, TreatmentService} from "../../services/treatment.service";
 import {TreatmentModalComponent} from "../treatment-modal/treatment-modal.component";
+import {initFlowbite} from "flowbite";
 
 @Component({
     selector: 'app-table',
@@ -16,7 +17,6 @@ export class TableComponent {
     treatments = input.required<ITreatment[]>();
     selectedTreatment = signal<ITreatment | null>(null);
     treatmentToDelete = signal<ITreatment | null>(null);
-    
     
     
     openEditModal(treatment: ITreatment) {

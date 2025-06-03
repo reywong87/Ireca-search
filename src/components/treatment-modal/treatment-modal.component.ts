@@ -49,7 +49,7 @@ export class TreatmentModalComponent {
       else {
         await this._treatmentService.createTreatment(newTreatment);
         this._toastService.showToast('Tratamiento creada correctamente.', 'success');
-        this.modalForm.reset();
+        this.resetModal();
       }
       
     }
