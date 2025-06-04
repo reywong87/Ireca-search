@@ -2,6 +2,7 @@ import {AfterViewInit, Component, effect, inject, input, signal} from '@angular/
 import {ITreatment, TreatmentService} from "../../services/treatment.service";
 import {TreatmentModalComponent} from "../treatment-modal/treatment-modal.component";
 import {initFlowbite} from "flowbite";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
     selector: 'app-table',
@@ -13,6 +14,7 @@ import {initFlowbite} from "flowbite";
 })
 export class TableComponent {
     private _treatmentService = inject(TreatmentService);
+    private _toastService = inject(ToastService);
 
     treatments = input.required<ITreatment[]>();
     selectedTreatment = signal<ITreatment | null>(null);
@@ -30,6 +32,7 @@ export class TableComponent {
     async deleteTreatment() {
         const treatment = this.treatmentToDelete();
         if (!treatment?.id) return;
-        await this._treatmentService.deleteTreatment(treatment.id)
+        await this._treatmentService.deleteTreatment(treatment.id);
+        this._toastService.showToast("Tratamiento borrado correctamente", "success");
     }
 }
