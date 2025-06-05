@@ -24,7 +24,7 @@ export class AdminTreatmentsComponent implements AfterViewInit{
         setTimeout(() => initFlowbite(), 0);
     });
     
-    treatments = this._treatmentService.getTreatments;
+    treatments = this._treatmentService.treatments;
     searchQuery = signal<string>('');
     filteredTreatments = createFilteredTreatments(this.treatments, this.searchQuery);
     

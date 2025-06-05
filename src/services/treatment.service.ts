@@ -1,12 +1,10 @@
-import {inject, Injectable} from '@angular/core';
-import {addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc} from "@angular/fire/firestore";
-import {toSignal} from "@angular/core/rxjs-interop";
-import {Observable} from "rxjs";
+import {effect, inject, Injectable, signal} from '@angular/core';
+import {SupabaseService} from "./supabase.service";
 
 export interface ITreatment {
-  id: string;
-  suffering: string;
-  treatment: string;
+    id: string;
+    suffering: string;
+    treatment: string;
 }
 
 export type TreatmentCreate = Omit<ITreatment, 'id'>;
@@ -14,25 +12,61 @@ export type TreatmentCreate = Omit<ITreatment, 'id'>;
 const PATH = 'treatments';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TreatmentService {
-  private _firestore = inject(Firestore);
-  private _collection = collection(this._firestore, PATH);
-  
-  getTreatments = toSignal(collectionData(this._collection, {idField: 'id'}) as Observable<ITreatment[]>, {initialValue: []});
-  
-  createTreatment(treatment: TreatmentCreate) {
-    return addDoc(this._collection, treatment);
-  }
-  
-  updateTreatment(id: string, data: Partial<TreatmentCreate>) {
-    const docRef = doc(this._collection, id);
-    return updateDoc(docRef, data);
-  }
-  
-  deleteTreatment(id: string) {
-    const docRef = doc(this._collection, id);
-    return deleteDoc(docRef);
-  }
+    private _supabase = inject(SupabaseService).client;
+    private _treatments = signal<ITreatment[]>([]);
+
+    constructor() {
+        effect(() => {
+            this.fetchTreatments();
+        });
+    }
+
+    // Devuelve signal reactivo para usar en componentes
+    get treatments() {
+        return this._treatments;
+    }
+
+    async fetchTreatments() {
+        const {data, error} = await this._supabase
+            .from('treatments')
+            .select('*')
+            .order('suffering', {ascending: true});
+
+        if (error) {
+            console.error('Error loading treatments', error);
+        } else {
+            this._treatments.set(data as ITreatment[]);
+        }
+    }
+
+    async createTreatment(treatment: TreatmentCreate) {
+      console.log('🧪 Tratamiento a guardar:', treatment);
+        const {error} = await this._supabase
+            .from('treatments')
+            .insert(treatment)
+            .throwOnError();
+
+        if (!error) await this.fetchTreatments(); // Recargar
+    }
+
+    async updateTreatment(id: string, data: Partial<TreatmentCreate>) {
+        const {error} = await this._supabase
+            .from('treatments')
+            .update(data)
+            .eq('id', id);
+
+        if (!error) await this.fetchTreatments();
+    }
+
+    async deleteTreatment(id: string) {
+        const {error} = await this._supabase
+            .from('treatments')
+            .delete()
+            .eq('id', id);
+
+        if (!error) await this.fetchTreatments();
+    }
 }

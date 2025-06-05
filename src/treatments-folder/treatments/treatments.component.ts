@@ -17,7 +17,7 @@ import {FilterTreatmentComponent} from "../../components/filters/filter-treatmen
 })
 export class TreatmentsComponent {
   private _treatmentService = inject(TreatmentService);
-  treatments = this._treatmentService.getTreatments;
+  treatments = this._treatmentService.treatments;
   searchQuery = signal<string>('');
   filteredTreatments = createFilteredTreatments(this.treatments, this.searchQuery);
   selectedCenters = signal<string[]>([]);
