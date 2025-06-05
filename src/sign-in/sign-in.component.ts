@@ -40,11 +40,4 @@ export class SignInComponent {
             this._toastService.showToast('Usuario o contraseña incorrecto', 'error');
         }
     }
-    
-   showErrorMsg(){
-        this.showError.set(true);
-       setTimeout(() => {
-           this.showError.set(false);
-       }, 2000);
-   }
 }

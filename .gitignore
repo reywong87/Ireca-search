@@ -44,4 +44,5 @@ Thumbs.db
 # Firebase
 .firebase
 *-debug.log
-.runtimeconfig.json
+.runtimeconfig.jso
+/firestore-export
