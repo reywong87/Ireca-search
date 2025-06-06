@@ -1,5 +1,5 @@
 <section class="bg-gray-50 dark:bg-gray-900 h-screen flex items-start">
-    <div class="max-w-screen-xl px-4 mx-auto lg:px-12 lg:w-2xl w-full mt-8">
+    <div class="max-w-screen-xl px-4 mx-auto lg:px-12 lg:w-5xl w-full mt-8">
         <!-- Start coding here -->
         <div class="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
             <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid gap-4 mb-6 mt-16 md:grid-cols-2">
+        <div class="columns-1 gap-4 mb-6 mt-16 md:columns-2 lg:columns-3">
             @for (treatment of filtered(); track treatment.id) {
                 <app-treatment-card [treatment]="treatment"/>
             }
