@@ -1,2 +1,2 @@
 # Ireca-search
-To do app made with Angular and Firebase
+To do app made with Angular, Firebase and Supabase.
