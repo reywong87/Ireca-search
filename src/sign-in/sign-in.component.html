@@ -18,11 +18,11 @@
                                placeholder="name@company.com" required="">
 
                         @if (form.get("email")?.invalid && form.get("email")?.touched) {
-                            @if (form.get("email")?.hasError("required")) {
+                            @if (form.controls["email"].hasError("required")) {
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Oops!</span> This field is required!</p>
                             }
-                            @if (form.get("email")?.hasError("email")) {
+                            @if (form.controls["email"].hasError("email")) {
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Oops!</span> You should type a proper email address!</p>
                             }
@@ -36,7 +36,7 @@
                                required="">
 
                         @if (form.get("password")?.invalid && form.get("password")?.touched) {
-                            @if (form.get("password")?.hasError("required")) {
+                            @if (form.controls["password"].hasError("required")) {
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Oops!</span> This field is required!</p>
                             }
